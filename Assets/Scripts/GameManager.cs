@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -10,19 +8,18 @@ public class GameManager : MonoBehaviour
     public AudioClip punchAudio;
     public AudioClip endSong;
 
+    PlayerController playerController;
+
     public Text scoreText;
     public static int score;
     private bool gameOver = false;
-    public GameObject button;
+    public bool gameStarted = false;
 
     public void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        Time.timeScale = 0;
-        DontDestroyOnLoad(GetComponent<GameManager>());
-        if (gameOver) {
-          StartGame();  
-        }  
+        playerController = FindObjectOfType<PlayerController>();
+        scoreText.gameObject.SetActive(false);
     }
 
     public void GameOver()
@@ -31,20 +28,21 @@ public class GameManager : MonoBehaviour
         {
             gameOver = true;
             audioSource.PlayOneShot(punchAudio, 1f);
-            audioSource.PlayOneShot(endSong, 0.9f);
+            audioSource.PlayOneShot(endSong, 0.9f); 
 
             Time.timeScale = 0; // Stop time | Pause Game
-            button.SetActive(true);
         } 
     }
 
     public void StartGame() {
+        playerController.birdGravityScale = 1f;
         audioSource.Stop();
-        Time.timeScale = 1;
         score = 0;
-        button.SetActive(false);
+        scoreText.gameObject.SetActive(true);
+        gameStarted = true;
         if (gameOver) {
             SceneManager.LoadScene("GameScene");
+            Time.timeScale = 1;
         }
     }
 

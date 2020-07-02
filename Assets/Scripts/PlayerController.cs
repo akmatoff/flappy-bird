@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public float force = 250f;
 
     private Rigidbody2D bird;
+    public float birdGravityScale;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
         gm = FindObjectOfType<GameManager>();
         bird = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+        bird.gravityScale = birdGravityScale;
     }
 
     // Update is called once per frame
@@ -28,10 +30,16 @@ public class PlayerController : MonoBehaviour
     {
         // On press 'Space'
         if (Input.GetKeyDown(KeyCode.Space)) {
-            if (gameOver == false) {
+            if (!gm.gameStarted) {
+                gm.StartGame();
+                bird.gravityScale = birdGravityScale;
+            }
+            if (!gameOver) {
                 bird.velocity = UnityEngine.Vector2.zero;
                 bird.AddForce(new UnityEngine.Vector2(0, force)); // Add Force to Y axis
                 audioSource.Play();
+            } else {
+                gm.StartGame();
             }
         }
     }

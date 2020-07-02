@@ -5,6 +5,7 @@ using UnityEngine;
 public class PipeSpawner : MonoBehaviour
 {
 
+    public GameManager gameManager;
     public GameObject pipes;
     public float elapsedTime;
     public float spawnDelay;
@@ -25,7 +26,7 @@ public class PipeSpawner : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
 
-        if (elapsedTime > spawnDelay)
+        if (elapsedTime > spawnDelay && gameManager.gameStarted)
         {
             spawnPipes();
             elapsedTime = 0.0f;
