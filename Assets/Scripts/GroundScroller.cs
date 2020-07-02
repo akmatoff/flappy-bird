@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundScroll : MonoBehaviour
+public class GroundScroller : MonoBehaviour
 {
-    public float scrollSpeed;
 
+    public float scrollSpeed;
     private Renderer renderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        renderer = GetComponent<Renderer>();        
     }
 
     // Update is called once per frame

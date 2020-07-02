@@ -8,7 +8,7 @@ public class BirdMotion : MonoBehaviour
 {
 
     // Flap force
-    public float force = 300f;
+    public float force = 250f;
 
     private Rigidbody2D bird;
 
@@ -24,10 +24,10 @@ public class BirdMotion : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) {
             bird.velocity = UnityEngine.Vector2.zero;
             bird.AddForce(new UnityEngine.Vector2(0, force));
-
         }
     }
 
+    // Start the scene from the beginning if collides
     void OnCollisionEnter2D(Collision2D collision)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
