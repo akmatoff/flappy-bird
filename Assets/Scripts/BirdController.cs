@@ -4,7 +4,7 @@ using System.Numerics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BirdMotion : MonoBehaviour
+public class BirdController : MonoBehaviour
 {
 
     // Flap force
@@ -30,6 +30,7 @@ public class BirdMotion : MonoBehaviour
     // Start the scene from the beginning if collides
     void OnCollisionEnter2D(Collision2D collision)
     {
+        GameManager.score = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
