@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     AudioSource audioSource;
     public AudioClip punchAudio;
     public AudioClip endSong;
@@ -14,10 +13,16 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public static int score;
     private bool gameOver = false;
+    public GameObject button;
 
     public void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        Time.timeScale = 0;
+        DontDestroyOnLoad(GetComponent<GameManager>());
+        if (gameOver) {
+          StartGame();  
+        }  
     }
 
     public void GameOver()
@@ -29,16 +34,18 @@ public class GameManager : MonoBehaviour
             audioSource.PlayOneShot(endSong, 0.9f);
 
             Time.timeScale = 0; // Stop time | Pause Game
-        }
-        
+            button.SetActive(true);
+        } 
     }
 
-    public void Restart()
-    {
-        Time.timeScale = 1; // Start time | Start Game
+    public void StartGame() {
         audioSource.Stop();
+        Time.timeScale = 1;
         score = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        button.SetActive(false);
+        if (gameOver) {
+            SceneManager.LoadScene("GameScene");
+        }
     }
 
     // Update is called once per frame

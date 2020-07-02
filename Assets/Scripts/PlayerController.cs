@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
 
     private GameManager gm;
     AudioSource audioSource;
+    private bool gameOver = false;
 
     // Flap force
     public float force = 250f;
@@ -28,9 +28,11 @@ public class PlayerController : MonoBehaviour
     {
         // On press 'Space'
         if (Input.GetKeyDown(KeyCode.Space)) {
-            bird.velocity = UnityEngine.Vector2.zero;
-            bird.AddForce(new UnityEngine.Vector2(0, force)); // Add Force to Y axis
-            audioSource.Play();
+            if (gameOver == false) {
+                bird.velocity = UnityEngine.Vector2.zero;
+                bird.AddForce(new UnityEngine.Vector2(0, force)); // Add Force to Y axis
+                audioSource.Play();
+            }
         }
     }
 
@@ -38,5 +40,6 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         gm.GameOver();
+        gameOver = true;
     }
 }

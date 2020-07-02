@@ -7,7 +7,7 @@ public class BackgroundScroll : MonoBehaviour
 {
     public float scrollSpeed;
 
-    private Renderer renderer;
+    private new Renderer renderer;
 
     // Start is called before the first frame update
     void Start()
