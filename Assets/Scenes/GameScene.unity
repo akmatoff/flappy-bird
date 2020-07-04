@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf08e279150a1f4abaa57ddfe18f13f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 250
+  force: 270
   birdGravityScale: 0
 --- !u!82 &1202966583
 AudioSource:

@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
             }
             if (!gameOver) {
                 bird.velocity = UnityEngine.Vector2.zero;
-                bird.AddForce(new UnityEngine.Vector2(0, force)); // Add Force to Y axis
+                bird.AddForce(new UnityEngine.Vector2(0, force));
                 audioSource.Play();
             } else {
                 gm.StartGame();
