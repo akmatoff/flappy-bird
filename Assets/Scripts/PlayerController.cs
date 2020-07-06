@@ -13,42 +13,65 @@ public class PlayerController : MonoBehaviour
     // Flap force
     public float force = 270f;
 
-    private Rigidbody2D bird;
-    public float birdGravityScale;
+    private Rigidbody2D player;
+    public float playerGravityScale;
     public float fallMultiplier = 2.5f;
 
     // Start is called before the first frame update
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
-        bird = GetComponent<Rigidbody2D>();
+        player = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
-        bird.gravityScale = birdGravityScale;
+        player.gravityScale = playerGravityScale;
     }
 
     // Update is called once per frame
     void Update()
     {
         // On press 'Space'
-        if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount == 1) {
+        if (Input.touchCount == 1) {
             if (!gm.gameStarted) {
                 gm.StartGame();
-                bird.gravityScale = birdGravityScale;
+                player.gravityScale = playerGravityScale;
             }
             if (!gameOver) {
-                bird.velocity = UnityEngine.Vector2.zero;
-                bird.AddForce(UnityEngine.Vector2.up * force);
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Began) {
+                    player.velocity = UnityEngine.Vector2.zero;
+                    player.AddForce(UnityEngine.Vector2.up * force);
+                    audioSource.Play();
+                }
+                
+            } else {
+                if (!gm.gameStarted) {
+                    gm.StartGame();
+                }
+                
+            }
+        } else if (Input.GetKeyDown(KeyCode.Space)) {
+            if (!gm.gameStarted) {
+                gm.StartGame();
+                player.gravityScale = playerGravityScale;
+            }
+            if (!gameOver) {
+                player.velocity = UnityEngine.Vector2.zero;
+                player.AddForce(UnityEngine.Vector2.up * force);
                 audioSource.Play();
             } else {
-                gm.StartGame();
+                if (!gm.gameStarted) {
+                    gm.StartGame();
+                }
             }
         }
 
         if (gm.gameStarted) {
             // Better jumping
-            bird.velocity += UnityEngine.Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            player.velocity += UnityEngine.Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
 
-            if (bird.velocity.y > 0) {
+            // Rotate the player
+            if (player.velocity.y > 0) {
                 transform.eulerAngles += UnityEngine.Vector3.forward * 22 * Time.deltaTime;
             } else {
                 transform.eulerAngles += UnityEngine.Vector3.back * 22 * Time.deltaTime;

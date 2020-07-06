@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         playerController = FindObjectOfType<PlayerController>();
         scoreText.gameObject.SetActive(false);
+        playerController.playerGravityScale = 0;
     }
 
     public void GameOver()
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
         if (gameOver == false)
         {
             gameOver = true;
+            gameStarted = false;
             audioSource.PlayOneShot(punchAudio, 1f);
             audioSource.PlayOneShot(endSong, 0.9f); 
 
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartGame() {
-        playerController.birdGravityScale = 1f;
+        playerController.playerGravityScale = 1f;
         audioSource.Stop();
         score = 0;
         scoreText.gameObject.SetActive(true);
