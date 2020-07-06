@@ -11,10 +11,11 @@ public class PlayerController : MonoBehaviour
     private bool gameOver = false;
 
     // Flap force
-    public float force = 250f;
+    public float force = 270f;
 
     private Rigidbody2D bird;
     public float birdGravityScale;
+    public float fallMultiplier = 2.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,19 +30,31 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // On press 'Space'
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0) {
             if (!gm.gameStarted) {
                 gm.StartGame();
                 bird.gravityScale = birdGravityScale;
             }
             if (!gameOver) {
                 bird.velocity = UnityEngine.Vector2.zero;
-                bird.AddForce(new UnityEngine.Vector2(0, force));
+                bird.AddForce(UnityEngine.Vector2.up * force);
                 audioSource.Play();
             } else {
                 gm.StartGame();
             }
         }
+
+        if (gm.gameStarted) {
+            // Better jumping
+            bird.velocity += UnityEngine.Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+
+            if (bird.velocity.y > 0) {
+                transform.eulerAngles += UnityEngine.Vector3.forward * 22 * Time.deltaTime;
+            } else {
+                transform.eulerAngles += UnityEngine.Vector3.back * 22 * Time.deltaTime;
+            }
+        }
+        
     }
 
     // Start the scene from the beginning if collides

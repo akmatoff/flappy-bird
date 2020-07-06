@@ -656,8 +656,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf08e279150a1f4abaa57ddfe18f13f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 270
+  force: 735
   birdGravityScale: 0
+  fallMultiplier: 4
 --- !u!82 &1202966583
 AudioSource:
   m_ObjectHideFlags: 0
