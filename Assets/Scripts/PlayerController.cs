@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // On press 'Space'
-        if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0) {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount == 1) {
             if (!gm.gameStarted) {
                 gm.StartGame();
                 bird.gravityScale = birdGravityScale;
