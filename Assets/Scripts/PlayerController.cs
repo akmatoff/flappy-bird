@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     private GameManager gm;
     AudioSource audioSource;
     private bool gameOver = false;
@@ -72,9 +71,9 @@ public class PlayerController : MonoBehaviour
 
             // Rotate the player
             if (player.velocity.y > 0) {
-                transform.eulerAngles += UnityEngine.Vector3.forward * 22 * Time.deltaTime;
+                transform.eulerAngles += UnityEngine.Vector3.forward * 23 * Time.deltaTime;
             } else {
-                transform.eulerAngles += UnityEngine.Vector3.back * 22 * Time.deltaTime;
+                transform.eulerAngles += UnityEngine.Vector3.back * 23 * Time.deltaTime;
             }
         }
         

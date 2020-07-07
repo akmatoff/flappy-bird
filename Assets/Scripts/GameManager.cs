@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     PlayerController playerController;
 
     public Text scoreText;
+    public Text highScoreText;
     public static int score;
+    public static int highscore;
     private bool gameOver = false;
     public bool gameStarted = false;
 
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         scoreText.gameObject.SetActive(false);
         playerController.playerGravityScale = 0;
+        highScoreText.text = PlayerPrefs.GetInt("Highscore", 0).ToString();
     }
 
     public void GameOver()
@@ -34,6 +37,12 @@ public class GameManager : MonoBehaviour
 
             Time.timeScale = 0; // Stop time | Pause Game
         } 
+
+        if (score > PlayerPrefs.GetInt("Highscore", 0)) {
+            PlayerPrefs.SetInt("Highscore", score);
+            highScoreText.text = score.ToString();
+        }
+        
     }
 
     public void StartGame() {
@@ -45,6 +54,7 @@ public class GameManager : MonoBehaviour
         if (gameOver) {
             SceneManager.LoadScene("GameScene");
             Time.timeScale = 1;
+            playerController.playerGravityScale = 0;
         }
     }
 
