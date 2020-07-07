@@ -14,8 +14,9 @@ public class GameManager : MonoBehaviour
     public Text highScoreText;
     public static int score;
     public static int highscore;
-    private bool gameOver = false;
+    public bool gameOver = false;
     public bool gameStarted = false;
+    private float timeAfterGameOver;
 
     public void Start()
     {
@@ -24,25 +25,23 @@ public class GameManager : MonoBehaviour
         scoreText.gameObject.SetActive(false);
         playerController.playerGravityScale = 0;
         highScoreText.text = PlayerPrefs.GetInt("Highscore", 0).ToString();
+        timeAfterGameOver = 0f;
     }
 
     public void GameOver()
     {
-        if (gameOver == false)
-        {
-            gameOver = true;
-            gameStarted = false;
-            audioSource.PlayOneShot(punchAudio, 1f);
-            audioSource.PlayOneShot(endSong, 0.9f); 
 
-            Time.timeScale = 0; // Stop time | Pause Game
-        } 
+        gameOver = true;
+        audioSource.PlayOneShot(punchAudio, 1f);
+        audioSource.PlayOneShot(endSong, 0.9f); 
+
+        Time.timeScale = 0; // Stop time | Pause Game
 
         if (score > PlayerPrefs.GetInt("Highscore", 0)) {
             PlayerPrefs.SetInt("Highscore", score);
             highScoreText.text = score.ToString();
         }
-        
+
     }
 
     public void StartGame() {
@@ -51,10 +50,13 @@ public class GameManager : MonoBehaviour
         score = 0;
         scoreText.gameObject.SetActive(true);
         gameStarted = true;
-        if (gameOver) {
-            SceneManager.LoadScene("GameScene");
+    }
+
+    public void RestartGame() {
+        if (timeAfterGameOver > 1250) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Time.timeScale = 1;
-            playerController.playerGravityScale = 0;
+            timeAfterGameOver = 0;
         }
     }
 
@@ -62,5 +64,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         scoreText.text = score + "";
+        if (gameOver) {
+            timeAfterGameOver += 1f * Time.fixedTime;
+        }
+        
     }
 }

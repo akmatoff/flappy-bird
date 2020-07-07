@@ -206,7 +206,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 720, y: 670}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
@@ -300,7 +300,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.846325
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1166,7 +1166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115.29, y: 283.6}
+  m_AnchoredPosition: {x: 98.2, y: 283.6}
   m_SizeDelta: {x: 106.92264, y: 32.808235}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1551900957
@@ -1369,8 +1369,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 112.7, y: 261.61}
-  m_SizeDelta: {x: 38.09955, y: 27.044857}
+  m_AnchoredPosition: {x: 94.4, y: 259.2}
+  m_SizeDelta: {x: 58.851425, y: 31.833744}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1813264048
 MonoBehaviour:

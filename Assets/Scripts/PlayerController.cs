@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     private GameManager gm;
     AudioSource audioSource;
-    private bool gameOver = false;
 
     // Flap force
     public float force = 270f;
@@ -34,7 +33,7 @@ public class PlayerController : MonoBehaviour
                 gm.StartGame();
                 player.gravityScale = playerGravityScale;
             }
-            if (!gameOver) {
+            if (!gm.gameOver) {
                 Touch touch = Input.GetTouch(0);
 
                 if (touch.phase == TouchPhase.Began) {
@@ -44,25 +43,20 @@ public class PlayerController : MonoBehaviour
                 }
                 
             } else {
-                if (!gm.gameStarted) {
-                    gm.StartGame();
-                }
-                
+                gm.RestartGame();
             }
         } else if (Input.GetKeyDown(KeyCode.Space)) {
             if (!gm.gameStarted) {
                 gm.StartGame();
                 player.gravityScale = playerGravityScale;
             }
-            if (!gameOver) {
+            if (!gm.gameOver) {
                 player.velocity = UnityEngine.Vector2.zero;
                 player.AddForce(UnityEngine.Vector2.up * force);
                 audioSource.Play();
             } else {
-                if (!gm.gameStarted) {
-                    gm.StartGame();
-                }
-            }
+                gm.RestartGame();
+            }   
         }
 
         if (gm.gameStarted) {
@@ -83,6 +77,5 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         gm.GameOver();
-        gameOver = true;
     }
 }
