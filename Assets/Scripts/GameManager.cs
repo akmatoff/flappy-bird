@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame() {
         if (timeAfterGameOver > 1250) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadSceneAsync("GameScene");
             Time.timeScale = 1;
             timeAfterGameOver = 0;
         }

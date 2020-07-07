@@ -27,25 +27,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // On press 'Space'
+        // On touch
         if (Input.touchCount == 1) {
-            if (!gm.gameStarted) {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began) {
+                if (!gm.gameStarted) {
                 gm.StartGame();
                 player.gravityScale = playerGravityScale;
-            }
-            if (!gm.gameOver) {
-                Touch touch = Input.GetTouch(0);
-
-                if (touch.phase == TouchPhase.Began) {
+                }
+                if (!gm.gameOver) {
                     player.velocity = UnityEngine.Vector2.zero;
                     player.AddForce(UnityEngine.Vector2.up * force);
                     audioSource.Play();
+                    
+                } else {
+                    gm.RestartGame();
                 }
-                
-            } else {
-                gm.RestartGame();
             }
-        } else if (Input.GetKeyDown(KeyCode.Space)) {
+        } else if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
             if (!gm.gameStarted) {
                 gm.StartGame();
                 player.gravityScale = playerGravityScale;
@@ -54,10 +53,11 @@ public class PlayerController : MonoBehaviour
                 player.velocity = UnityEngine.Vector2.zero;
                 player.AddForce(UnityEngine.Vector2.up * force);
                 audioSource.Play();
+                
             } else {
                 gm.RestartGame();
-            }   
-        }
+            }
+        } 
 
         if (gm.gameStarted) {
             // Better jumping
