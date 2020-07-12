@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Text highScoreText;
     public static int score;
     public static int highscore;
+    public GameObject menu;
     public bool gameOver = false;
     public bool gameStarted = false;
     private float timeAfterGameOver;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         playerController = FindObjectOfType<PlayerController>();
         scoreText.gameObject.SetActive(false);
+        menu.gameObject.SetActive(false);
         playerController.playerGravityScale = 0;
         highScoreText.text = PlayerPrefs.GetInt("Highscore", 0).ToString();
         timeAfterGameOver = 0f;
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
         gameOver = true;
         audioSource.PlayOneShot(punchAudio, 1f);
         audioSource.PlayOneShot(endSong, 0.9f); 
+        menu.gameObject.SetActive(true);
 
         Time.timeScale = 0; // Stop time | Pause Game
 
