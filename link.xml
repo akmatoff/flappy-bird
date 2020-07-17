@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<linker>
+	<assembly fullname="dotenv.net">
+		<type fullname="dotenv.net" preserve="all" />
+	</assembly>
+	<assembly fullname="Newtonsoft.Json">
+		<type fullname="Newtonsoft.Json" preserve="all" />
+	</assembly>
+	<assembly fullname="System.Memory">
+		<type fullname="System.Memory" preserve="all" />
+	</assembly>
+	<assembly fullname="System.Runtime.CompilerServices.Unsafe">
+		<type fullname="System.Runtime.CompilerServices.Unsafe" preserve="all" />
+	</assembly>
+	<assembly fullname="System.Buffers">
+		<type fullname="System.Buffers" preserve="all" />
+	</assembly>
+	<assembly fullname="System.Numerics.Vectors">
+		<type fullname="System.Numerics.Vectors" preserve="all" />
+	</assembly>
+</linker>
