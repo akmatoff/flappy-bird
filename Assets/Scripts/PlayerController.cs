@@ -39,10 +39,7 @@ public class PlayerController : MonoBehaviour
                     player.velocity = UnityEngine.Vector2.zero;
                     player.AddForce(UnityEngine.Vector2.up * force);
                     audioSource.Play();
-                    
-                } else {
-                    gm.RestartGame();
-                }
+                } 
             }
         } else if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
             if (!gm.gameStarted) {
@@ -53,10 +50,7 @@ public class PlayerController : MonoBehaviour
                 player.velocity = UnityEngine.Vector2.zero;
                 player.AddForce(UnityEngine.Vector2.up * force);
                 audioSource.Play();
-                
-            } else {
-                gm.RestartGame();
-            }
+            } 
         } 
 
         if (gm.gameStarted) {

@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     public GameObject menu;
     public bool gameOver = false;
     public bool gameStarted = false;
-    private float timeAfterGameOver;
 
     public void Start()
     {
@@ -27,7 +26,6 @@ public class GameManager : MonoBehaviour
         menu.gameObject.SetActive(false);
         playerController.playerGravityScale = 0;
         highScoreText.text = PlayerPrefs.GetInt("Highscore", 0).ToString();
-        timeAfterGameOver = 0f;
     }
 
     public void GameOver()
@@ -56,20 +54,17 @@ public class GameManager : MonoBehaviour
     }
 
     public void RestartGame() {
-        if (timeAfterGameOver > 1250) {
-            SceneManager.LoadSceneAsync("GameScene");
-            Time.timeScale = 1;
-            timeAfterGameOver = 0;
-        }
+        SceneManager.LoadSceneAsync("GameScene");
+        Time.timeScale = 1;
+    }
+
+    public void OpenLeaderboard() {
+        SceneManager.LoadSceneAsync("LeaderboardScene");
     }
 
     // Update is called once per frame
     void Update()
     {
         scoreText.text = score + "";
-        if (gameOver) {
-            timeAfterGameOver += 1f * Time.fixedTime;
-        }
-        
     }
 }
