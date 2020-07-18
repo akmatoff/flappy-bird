@@ -690,6 +690,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0fcbe987b2a00949a2929ffd3bc8841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recordElement: {fileID: 416665312021078857, guid: cb4b6c298360d7747b8b0cd7e18b9dc0,
+    type: 3}
+  leaderboardListContent: {fileID: 1861932247}
 --- !u!4 &1154160848
 Transform:
   m_ObjectHideFlags: 0
