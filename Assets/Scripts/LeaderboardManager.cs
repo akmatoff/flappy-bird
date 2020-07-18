@@ -7,8 +7,9 @@ using dotenv.net;
 
 public class LeaderboardManager : MonoBehaviour
 {
-    string url = "http://flappybaichikapi.akmatoff.repl.co/api/records/";
+    string url = "http://flappybaichikapi.akmatoff.repl.co/api/records.json";
     string token;
+    string jsonStringArray;
     void Start()
     {
         DotEnv.Config(true, ".env"); // Set custom path of the file
@@ -26,6 +27,11 @@ public class LeaderboardManager : MonoBehaviour
 
         if (getRecords.responseCode == 200) {
             Debug.Log("Data fetched!");
+            jsonStringArray = "{\"records\":" + getRecords.downloadHandler.text + "}";
+            Records records = JsonUtility.FromJson<Records>(jsonStringArray);
+            foreach(var record in records.records) {
+                print(record.player + ", " + record.highscore);
+            }
         } else {
             Debug.Log(getRecords.error);
         }
