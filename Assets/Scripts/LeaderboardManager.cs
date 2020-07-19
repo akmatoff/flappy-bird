@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
+using TMPro;
 using dotenv.net.Utilities;
 using dotenv.net;
 
@@ -33,16 +32,14 @@ public class LeaderboardManager : MonoBehaviour
             jsonStringArray = "{\"records\":" + getRecords.downloadHandler.text + "}"; // Wrap JSON Array
             Records records = JsonUtility.FromJson<Records>(jsonStringArray); // Parse JSON Array
 
-
             // Loop through each record
             foreach(var record in records.records) {
-                print(record.player + ", " + record.highscore);
-                Vector2 position = new Vector2(this.transform.position.x, this.transform.position.y);
-                Quaternion q = this.transform.rotation;
-                recordElement.gameObject.GetComponentInChildren<RecordElement>().playerNameText.GetComponent<Text>().text = record.player;
+                Vector2 position = new Vector2(this.transform.position.x, this.transform.position.y); // Assign record object's position
+                Quaternion q = this.transform.rotation; // Assign record object's rotation
+                recordElement.GetComponent<RecordElement>().playerNameText.GetComponent<TextMeshProUGUI>().text = record.player; 
+                recordElement.GetComponent<RecordElement>().highscoreText.GetComponent<TextMeshProUGUI>().text = record.highscore.ToString();
                 GameObject newRecordObject = Instantiate(recordElement, position, q);
                 newRecordObject.transform.SetParent(leaderboardListContent);
-
             }
         } else {
             Debug.Log(getRecords.error);
