@@ -1,6 +1,8 @@
 using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using TMPro;
 using dotenv.net.Utilities;
 using dotenv.net;
@@ -14,11 +16,14 @@ public class LeaderboardManager : MonoBehaviour
     int recordPosition;
     public GameObject recordElement;
     public GameObject errorText;
+    public GameObject addToLeaderboardMenu;
+    public GameObject playerNameInput;
     public Transform leaderboardListContent;
     void Start()
     {
         recordPosition = 1;
         errorText.gameObject.SetActive(false);
+        addToLeaderboardMenu.gameObject.SetActive(false);
         DotEnv.Config(true, ".env"); // Set custom path of the file
         var envReader = new EnvReader(); 
         token = envReader.GetStringValue("TOKEN"); // Get string from dotenv file
@@ -53,6 +58,36 @@ public class LeaderboardManager : MonoBehaviour
             errorText.SetActive(true);
         }
 
+    }
+
+    public void SubmitRecord() {
+        StartCoroutine(PostRecord());
+    }
+
+    IEnumerator PostRecord() {
+        int playerHighscore = PlayerPrefs.GetInt("Highscore", 0);
+        string playerName = playerNameInput.GetComponent<InputField>().text;
+        print(playerName + ", " + playerHighscore);
+        Record data = new Record();
+        data.player = playerName;
+        data.highscore = playerHighscore;
+        string jsonData = JsonUtility.ToJson(data);
+        print(jsonData);
+        byte[] rawData = System.Text.Encoding.UTF8.GetBytes(jsonData);
+        UnityWebRequest postRecord = UnityWebRequest.Post(url, jsonData);
+        postRecord.uploadHandler = new UploadHandlerRaw(rawData);
+        postRecord.SetRequestHeader("Content-Type", "application/json");
+        postRecord.SetRequestHeader("Accept", "application/json");
+        postRecord.SetRequestHeader("Authorization", $"Token {token}");
+        yield return postRecord.SendWebRequest();
+
+        if (postRecord.responseCode == 201) {
+            Debug.Log("Posted!");   
+        } else {
+            Debug.Log(postRecord.error);
+        }
+
+        addToLeaderboardMenu.SetActive(false);
     }
 
     static void sort(Record[] array) {
