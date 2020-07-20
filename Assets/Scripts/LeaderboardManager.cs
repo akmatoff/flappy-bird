@@ -13,10 +13,12 @@ public class LeaderboardManager : MonoBehaviour
     Record[] sortedRecords;
     int recordPosition;
     public GameObject recordElement;
+    public GameObject errorText;
     public Transform leaderboardListContent;
     void Start()
     {
         recordPosition = 1;
+        errorText.gameObject.SetActive(false);
         DotEnv.Config(true, ".env"); // Set custom path of the file
         var envReader = new EnvReader(); 
         token = envReader.GetStringValue("TOKEN"); // Get string from dotenv file
@@ -48,6 +50,7 @@ public class LeaderboardManager : MonoBehaviour
             }
         } else {
             Debug.Log(getRecords.error);
+            errorText.SetActive(true);
         }
 
     }
