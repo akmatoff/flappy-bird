@@ -7,4 +7,8 @@ public class AddToLeaderboard : MonoBehaviour
     public void ShowAddToLeaderboardMenu() {
         addToLeaderboardMenu.SetActive(true);
     }
+
+    public void CloseAddToLeaderboardMenu() {
+        addToLeaderboardMenu.SetActive(false);
+    }
 }

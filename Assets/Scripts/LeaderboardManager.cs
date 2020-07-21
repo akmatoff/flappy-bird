@@ -44,14 +44,7 @@ public class LeaderboardManager : MonoBehaviour
             sort(records.records);
             // Loop through each record
             foreach(var record in records.records) {
-                Vector2 position = new Vector2(this.transform.position.x, this.transform.position.y); // Assign record object's position
-                Quaternion q = this.transform.rotation; // Assign record object's rotation
-                recordElement.GetComponent<RecordElement>().positionText.GetComponent<TextMeshProUGUI>().text = recordPosition.ToString();
-                recordElement.GetComponent<RecordElement>().playerNameText.GetComponent<TextMeshProUGUI>().text = record.player; 
-                recordElement.GetComponent<RecordElement>().highscoreText.GetComponent<TextMeshProUGUI>().text = record.highscore.ToString();
-                GameObject newRecordObject = Instantiate(recordElement, position, q);
-                newRecordObject.transform.SetParent(leaderboardListContent);
-                recordPosition++;
+                createObjects(record.player, record.highscore.ToString());
             }
         } else {
             Debug.Log(getRecords.error);
@@ -67,27 +60,37 @@ public class LeaderboardManager : MonoBehaviour
     IEnumerator PostRecord() {
         int playerHighscore = PlayerPrefs.GetInt("Highscore", 0);
         string playerName = playerNameInput.GetComponent<InputField>().text;
-        print(playerName + ", " + playerHighscore);
-        Record data = new Record();
-        data.player = playerName;
+        Record data = new Record(); // Create a new Record object
+        data.player = playerName; 
         data.highscore = playerHighscore;
-        string jsonData = JsonUtility.ToJson(data);
-        print(jsonData);
-        byte[] rawData = System.Text.Encoding.UTF8.GetBytes(jsonData);
-        UnityWebRequest postRecord = UnityWebRequest.Post(url, jsonData);
-        postRecord.uploadHandler = new UploadHandlerRaw(rawData);
-        postRecord.SetRequestHeader("Content-Type", "application/json");
+        string jsonData = JsonUtility.ToJson(data); // Parse to JSON from the object
+        byte[] rawData = System.Text.Encoding.UTF8.GetBytes(jsonData); // Get Raw Data from JSON
+        UnityWebRequest postRecord = UnityWebRequest.Post(url, jsonData); // Send Post request to API
+        postRecord.uploadHandler = new UploadHandlerRaw(rawData); // Set data to POST
+        postRecord.SetRequestHeader("Content-Type", "application/json"); // Set headers
         postRecord.SetRequestHeader("Accept", "application/json");
         postRecord.SetRequestHeader("Authorization", $"Token {token}");
         yield return postRecord.SendWebRequest();
 
         if (postRecord.responseCode == 201) {
-            Debug.Log("Posted!");   
+            Debug.Log("Posted!"); 
+            createObjects(playerName, playerHighscore.ToString());  
         } else {
             Debug.Log(postRecord.error);
         }
 
         addToLeaderboardMenu.SetActive(false);
+    }
+    // Create record object from API
+    void createObjects(string playerName, string playerHighscore) {
+        Vector2 position = new Vector2(this.transform.position.x, this.transform.position.y); // Assign record object's position
+        Quaternion q = this.transform.rotation; // Assign record object's rotation
+        recordElement.GetComponent<RecordElement>().positionText.GetComponent<TextMeshProUGUI>().text = recordPosition.ToString();
+        recordElement.GetComponent<RecordElement>().playerNameText.GetComponent<TextMeshProUGUI>().text = playerName; 
+        recordElement.GetComponent<RecordElement>().highscoreText.GetComponent<TextMeshProUGUI>().text = playerHighscore;
+        GameObject newRecordObject = Instantiate(recordElement, position, q);
+        newRecordObject.transform.SetParent(leaderboardListContent);
+        recordPosition++;
     }
 
     static void sort(Record[] array) {
