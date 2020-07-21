@@ -88,7 +88,6 @@ public class LeaderboardManager : MonoBehaviour
 
     IEnumerator PostRecord() {
         string playerName = playerNameInput.GetComponent<InputField>().text; // Extract text from input
-        playerName.Trim();
         Record data = new Record(); // Create a new Record object
         data.player = playerName; 
         data.highscore = playerHighscore;
