@@ -1,5 +1,4 @@
 using System.Collections;
-using System;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -9,25 +8,32 @@ using dotenv.net;
 
 public class LeaderboardManager : MonoBehaviour
 {
-    string url = "http://flappybaichikapi.akmatoff.repl.co/api/records.json";
+    string url = "http://flappybaichikapi.akmatoff.repl.co/api/records/";
     string token;
     string jsonStringArray;
     Record[] sortedRecords;
     int recordPosition;
+    int playerHighscore;
+    int playerToUpdate;
+    bool playerExists;
+    bool dataFetched;
     public GameObject recordElement;
     public GameObject errorText;
     public GameObject addToLeaderboardMenu;
-    public GameObject playerNameInput;
+    public GameObject playerNameInput; // Input object
     public Transform leaderboardListContent;
+    Records records;
     void Start()
     {
+        dataFetched = false;
+        playerHighscore = PlayerPrefs.GetInt("Highscore", 0);
         recordPosition = 1;
         errorText.gameObject.SetActive(false);
         addToLeaderboardMenu.gameObject.SetActive(false);
         DotEnv.Config(true, ".env"); // Set custom path of the file
         var envReader = new EnvReader(); 
         token = envReader.GetStringValue("TOKEN"); // Get string from dotenv file
-        StartCoroutine(FetchRecords()); 
+        StartCoroutine(FetchRecords()); // Fetch data on start
     }
 
     IEnumerator FetchRecords() {
@@ -40,26 +46,49 @@ public class LeaderboardManager : MonoBehaviour
         if (getRecords.responseCode == 200) {
             Debug.Log("Data fetched!");
             jsonStringArray = "{\"records\":" + getRecords.downloadHandler.text + "}"; // Wrap JSON Array
-            Records records = JsonUtility.FromJson<Records>(jsonStringArray); // Parse JSON Array
+            records = JsonUtility.FromJson<Records>(jsonStringArray); // Parse JSON Array
             sort(records.records);
             // Loop through each record
             foreach(var record in records.records) {
-                createObjects(record.player, record.highscore.ToString());
+                if (!dataFetched) {
+                    createObjects(record.player, record.highscore.ToString(), record_id: record.record_id);
+                }
             }
+            dataFetched = true;
         } else {
             Debug.Log(getRecords.error);
             errorText.SetActive(true);
         }
-
     }
 
     public void SubmitRecord() {
-        StartCoroutine(PostRecord());
+        string playerName = playerNameInput.GetComponent<InputField>().text.Trim(); // Extract text from input
+        print(playerName);
+        playerExists = false;
+        if (playerName != "") {
+            foreach (var record in records.records) {
+                if (record.player.ToLower() == playerName.ToLower()) {
+                    if (playerHighscore > record.highscore) {
+                        playerToUpdate = record.record_id;
+                        StartCoroutine(UpdateRecord());
+                        StartCoroutine(FetchRecords());
+                    }
+                    playerExists = true;
+                } 
+            }
+
+            if (records.records.Length == 0 || !playerExists) {
+                StartCoroutine(PostRecord());
+                StartCoroutine(FetchRecords());
+            }
+            playerNameInput.GetComponent<InputField>().text = "";
+            addToLeaderboardMenu.SetActive(false);
+        }
     }
 
     IEnumerator PostRecord() {
-        int playerHighscore = PlayerPrefs.GetInt("Highscore", 0);
-        string playerName = playerNameInput.GetComponent<InputField>().text;
+        string playerName = playerNameInput.GetComponent<InputField>().text; // Extract text from input
+        playerName.Trim();
         Record data = new Record(); // Create a new Record object
         data.player = playerName; 
         data.highscore = playerHighscore;
@@ -74,20 +103,45 @@ public class LeaderboardManager : MonoBehaviour
 
         if (postRecord.responseCode == 201) {
             Debug.Log("Posted!"); 
-            createObjects(playerName, playerHighscore.ToString());  
+            createObjects(playerName, playerHighscore.ToString());
         } else {
-            Debug.Log(postRecord.error);
+            Debug.Log("POST ERROR: " + postRecord.error);
         }
-
-        addToLeaderboardMenu.SetActive(false);
     }
+
+    IEnumerator UpdateRecord() {
+        string playerName = playerNameInput.GetComponent<InputField>().text.Trim(); // Extract text from input
+        Record data = new Record(); // Create a new Record object
+        data.record_id = playerToUpdate;
+        data.player = playerName; 
+        data.highscore = playerHighscore;
+        string updateData = JsonUtility.ToJson(data);
+        print(updateData);
+        UnityWebRequest updateRecord = UnityWebRequest.Put(url + $"{playerToUpdate}/", updateData);
+        updateRecord.SetRequestHeader("Content-Type", "application/json"); // Set headers
+        updateRecord.SetRequestHeader("Accept", "application/json");
+        updateRecord.SetRequestHeader("Authorization", $"Token {token}");
+        yield return updateRecord.SendWebRequest();
+
+        if (updateRecord.responseCode == 200) {
+            Debug.Log("updated!");
+            if (recordElement.GetComponent<RecordElement>().record_id == playerToUpdate) {
+                recordElement.GetComponent<RecordElement>().highscoreText.GetComponent<TextMeshProUGUI>().text = playerHighscore.ToString(); 
+                print("object changed!");
+            }
+        } else {
+            Debug.Log("PUT ERROR: " + updateRecord.error);
+        }
+    }
+
     // Create record object from API
-    void createObjects(string playerName, string playerHighscore) {
+    void createObjects(string playerName, string playerHighscore, int record_id = 0) {
         Vector2 position = new Vector2(this.transform.position.x, this.transform.position.y); // Assign record object's position
         Quaternion q = this.transform.rotation; // Assign record object's rotation
         recordElement.GetComponent<RecordElement>().positionText.GetComponent<TextMeshProUGUI>().text = recordPosition.ToString();
         recordElement.GetComponent<RecordElement>().playerNameText.GetComponent<TextMeshProUGUI>().text = playerName; 
         recordElement.GetComponent<RecordElement>().highscoreText.GetComponent<TextMeshProUGUI>().text = playerHighscore;
+        recordElement.GetComponent<RecordElement>().record_id = record_id;
         GameObject newRecordObject = Instantiate(recordElement, position, q);
         newRecordObject.transform.SetParent(leaderboardListContent);
         recordPosition++;
