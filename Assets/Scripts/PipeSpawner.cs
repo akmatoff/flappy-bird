@@ -13,7 +13,7 @@ public class PipeSpawner : MonoBehaviour
     
     public void spawnPipes()
     {
-        variation = Random.Range(-2.3f, 2.3f);
+        variation = Random.Range(-2.2f, 2.2f);
 
         Vector3 position = new Vector3(this.transform.position.x, this.transform.position.y + variation, 1.0f);
         Quaternion q = this.transform.rotation;

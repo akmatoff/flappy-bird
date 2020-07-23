@@ -5,7 +5,7 @@ using UnityEngine;
 public class PipeController : MonoBehaviour
 {
 
-    public float movespeed = 10f;
+    public float movespeed = 8f;
     private Rigidbody2D rb;
 
     // Start is called before the first frame update

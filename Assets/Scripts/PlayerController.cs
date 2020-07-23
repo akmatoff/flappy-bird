@@ -32,8 +32,8 @@ public class PlayerController : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began) {
                 if (!gm.gameStarted) {
-                gm.StartGame();
-                player.gravityScale = playerGravityScale;
+                    gm.StartGame();
+                    player.gravityScale = playerGravityScale;
                 }
                 if (!gm.gameOver) {
                     player.velocity = UnityEngine.Vector2.zero;
@@ -59,9 +59,9 @@ public class PlayerController : MonoBehaviour
 
             // Rotate the player
             if (player.velocity.y > 0) {
-                transform.eulerAngles += UnityEngine.Vector3.forward * 23 * Time.deltaTime;
-            } else {
-                transform.eulerAngles += UnityEngine.Vector3.back * 23 * Time.deltaTime;
+                transform.eulerAngles += UnityEngine.Vector3.forward * 20 * Time.deltaTime;
+            } else if (player.velocity.y < 0) {
+                transform.eulerAngles += UnityEngine.Vector3.back * 20 * Time.deltaTime;
             }
         }
         

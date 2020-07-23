@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         menu.gameObject.SetActive(false);
         playerController.playerGravityScale = 0;
         highScoreText.text = PlayerPrefs.GetInt("Highscore", 0).ToString();
+        Time.timeScale = 1;
     }
 
     public void GameOver()
@@ -55,7 +56,6 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame() {
         SceneManager.LoadSceneAsync("GameScene");
-        Time.timeScale = 1;
     }
 
     public void OpenLeaderboard() {

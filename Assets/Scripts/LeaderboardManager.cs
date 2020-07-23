@@ -8,7 +8,7 @@ using dotenv.net;
 
 public class LeaderboardManager : MonoBehaviour
 {
-    string url = "http://flappybaichikapi.akmatoff.repl.co/api/records/";
+    string url = "https://flappybaichikapi.akmatoff.repl.co/api/records/";
     string token;
     string jsonStringArray;
     Record[] sortedRecords;
