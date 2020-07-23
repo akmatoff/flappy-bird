@@ -23,7 +23,7 @@ public class LeaderboardManager : MonoBehaviour
     public GameObject playerNameInput; // Input object
     public Transform leaderboardListContent;
     Records records;
-    void Awake()
+    void Start()
     {
         dataFetched = false;
         playerHighscore = PlayerPrefs.GetInt("Highscore", 0);

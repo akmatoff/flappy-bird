@@ -66,7 +66,7 @@ PlayerSettings:
   allowedAutorotateToLandscapeLeft: 1
   useOSAutorotation: 1
   use32BitDisplayBuffer: 1
-  preserveFramebufferAlpha: 0
+  preserveFramebufferAlpha: 1
   disableDepthAndStencilBuffers: 0
   androidStartInFullscreen: 1
   androidRenderOutsideSafeArea: 1
@@ -143,7 +143,6 @@ PlayerSettings:
   - {fileID: 8300000, guid: 857561edabf9dfc49a6acf20f96ea92b, type: 3}
   - {fileID: 8300000, guid: e70aae32da93e9345b503a60e9e2a4b3, type: 3}
   - {fileID: 8300000, guid: 2f4d3aa465aee954f86039d035a31ecd, type: 3}
-  - {fileID: 5801930239271514896, guid: ecf0b4e336b612648824dae935315fb0, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
