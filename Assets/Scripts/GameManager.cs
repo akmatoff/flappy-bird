@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public bool gameOver = false;
     public bool gameStarted = false;
 
-    public void Start()
+    public void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         playerController = FindObjectOfType<PlayerController>();

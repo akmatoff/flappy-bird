@@ -15,8 +15,7 @@ public class PlayerController : MonoBehaviour
     public float playerGravityScale;
     public float fallMultiplier = 2.5f;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gm = FindObjectOfType<GameManager>();
         player = GetComponent<Rigidbody2D>();
