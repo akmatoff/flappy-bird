@@ -55,11 +55,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void RestartGame() {
-        SceneManager.LoadSceneAsync("GameScene");
+        SceneManager.LoadScene(0);
     }
 
     public void OpenLeaderboard() {
-        SceneManager.LoadSceneAsync("LeaderboardScene");
+        SceneManager.LoadScene(1);
     }
 
     // Update is called once per frame
