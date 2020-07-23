@@ -23,13 +23,13 @@ public class LeaderboardManager : MonoBehaviour
     public GameObject playerNameInput; // Input object
     public Transform leaderboardListContent;
     Records records;
-    void OnEnable()
+    void Awake()
     {
         dataFetched = false;
         playerHighscore = PlayerPrefs.GetInt("Highscore", 0);
         recordPosition = 1;
-        errorText.gameObject.SetActive(false);
-        addToLeaderboardMenu.gameObject.SetActive(false);
+        errorText.SetActive(false);
+        addToLeaderboardMenu.SetActive(false);
         DotEnv.Config(true, ".env"); // Set custom path of the file
         var envReader = new EnvReader(); 
         token = envReader.GetStringValue("TOKEN"); // Get string from dotenv file

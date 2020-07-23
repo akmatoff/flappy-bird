@@ -22,16 +22,15 @@ public class GameManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         playerController = FindObjectOfType<PlayerController>();
-        scoreText.gameObject.SetActive(false);
-        menu.gameObject.SetActive(false);
         playerController.playerGravityScale = 0;
         highScoreText.text = PlayerPrefs.GetInt("Highscore", 0).ToString();
+        menu.gameObject.SetActive(false);
+        scoreText.gameObject.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void GameOver()
     {
-
         gameOver = true;
         audioSource.PlayOneShot(punchAudio, 1f);
         audioSource.PlayOneShot(endSong, 0.9f); 

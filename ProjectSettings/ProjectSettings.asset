@@ -6,7 +6,7 @@ PlayerSettings:
   serializedVersion: 21
   productGUID: 67f6ebfe550cf5e49ad3626235781450
   AndroidProfiler: 0
-  AndroidFilterTouchesWhenObscured: 0
+  AndroidFilterTouchesWhenObscured: 1
   AndroidEnableSustainedPerformanceMode: 0
   defaultScreenOrientation: 0
   targetDevice: 2
@@ -70,7 +70,7 @@ PlayerSettings:
   disableDepthAndStencilBuffers: 0
   androidStartInFullscreen: 1
   androidRenderOutsideSafeArea: 1
-  androidUseSwappy: 0
+  androidUseSwappy: 1
   androidBlitType: 0
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
@@ -143,6 +143,7 @@ PlayerSettings:
   - {fileID: 8300000, guid: 857561edabf9dfc49a6acf20f96ea92b, type: 3}
   - {fileID: 8300000, guid: e70aae32da93e9345b503a60e9e2a4b3, type: 3}
   - {fileID: 8300000, guid: 2f4d3aa465aee954f86039d035a31ecd, type: 3}
+  - {fileID: 5801930239271514896, guid: ecf0b4e336b612648824dae935315fb0, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -236,8 +237,8 @@ PlayerSettings:
   clonedFromGUID: 5f34be1353de5cf4398729fda238591b
   templatePackageId: com.unity.template.2d@3.3.0
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  useCustomMainManifest: 0
-  useCustomLauncherManifest: 0
+  useCustomMainManifest: 1
+  useCustomLauncherManifest: 1
   useCustomMainGradleTemplate: 0
   useCustomLauncherGradleManifest: 0
   useCustomBaseGradleTemplate: 0
