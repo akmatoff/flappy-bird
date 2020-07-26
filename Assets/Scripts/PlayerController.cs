@@ -37,9 +37,7 @@ public class PlayerController : MonoBehaviour
                     audioSource.Play();
                 } 
             }
-        } 
-
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+        } else if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
             if (!gm.gameStarted) {
                 gm.StartGame();
                 player.gravityScale = playerGravityScale;
