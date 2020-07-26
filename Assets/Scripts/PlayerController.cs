@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -40,7 +37,9 @@ public class PlayerController : MonoBehaviour
                     audioSource.Play();
                 } 
             }
-        } else if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+        } 
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
             if (!gm.gameStarted) {
                 gm.StartGame();
                 player.gravityScale = playerGravityScale;

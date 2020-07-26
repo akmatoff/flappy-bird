@@ -70,7 +70,7 @@ PlayerSettings:
   disableDepthAndStencilBuffers: 0
   androidStartInFullscreen: 1
   androidRenderOutsideSafeArea: 1
-  androidUseSwappy: 1
+  androidUseSwappy: 0
   androidBlitType: 0
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
@@ -130,19 +130,7 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 1.0.1
-  preloadedAssets:
-  - {fileID: 11500000, guid: 19cd7e470dd6266429d7d3bfe3697e26, type: 3}
-  - {fileID: 102900000, guid: df8c3de9db7855e4290a63b6d1eec08d, type: 3}
-  - {fileID: 21300000, guid: e7b82950cd650c5449aaf0e8ab08e3a0, type: 3}
-  - {fileID: 102900000, guid: 64a231ebcbeeeb149a5f980448f2d87b, type: 3}
-  - {fileID: 11500000, guid: f0fcbe987b2a00949a2929ffd3bc8841, type: 3}
-  - {fileID: 11500000, guid: aaf08e279150a1f4abaa57ddfe18f13f, type: 3}
-  - {fileID: 11500000, guid: 6b2dc361ccfb66545b5db8d9c6df7eb5, type: 3}
-  - {fileID: 11500000, guid: eae4127dca99f3c42878fb15d7d5011c, type: 3}
-  - {fileID: 11500000, guid: edeaf7bd3196a7d4eacbe6a451baf641, type: 3}
-  - {fileID: 8300000, guid: 857561edabf9dfc49a6acf20f96ea92b, type: 3}
-  - {fileID: 8300000, guid: e70aae32da93e9345b503a60e9e2a4b3, type: 3}
-  - {fileID: 8300000, guid: 2f4d3aa465aee954f86039d035a31ecd, type: 3}
+  preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -261,7 +249,7 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   AndroidMinifyWithR8: 0
-  AndroidMinifyRelease: 1
+  AndroidMinifyRelease: 0
   AndroidMinifyDebug: 0
   AndroidValidateAppBundleSize: 1
   AndroidAppBundleSizeToValidate: 150
