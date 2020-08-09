@@ -3170,6 +3170,10 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[109].y
       value: -3.62
       objectReference: {fileID: 0}
+    - target: {fileID: 6806121984325934310, guid: 2c31c69415b37214c878d919703355ca, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6806121984325934304, guid: 2c31c69415b37214c878d919703355ca, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2c31c69415b37214c878d919703355ca, type: 3}

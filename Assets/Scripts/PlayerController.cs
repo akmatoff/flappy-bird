@@ -55,9 +55,9 @@ public class PlayerController : MonoBehaviour
 
             // Rotate the player
             if (player.velocity.y > 0) {
-                transform.eulerAngles += UnityEngine.Vector3.forward * 20 * Time.deltaTime;
+                transform.eulerAngles += UnityEngine.Vector3.forward * 18 * Time.deltaTime;
             } else if (player.velocity.y < 0) {
-                transform.eulerAngles += UnityEngine.Vector3.back * 20 * Time.deltaTime;
+                transform.eulerAngles += UnityEngine.Vector3.back * 18 * Time.deltaTime;
             }
         }
         
