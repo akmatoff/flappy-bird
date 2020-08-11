@@ -12,4 +12,4 @@ EditorBuildSettings:
     path: Assets/Scenes/LeaderboardScene.unity
     guid: df8c3de9db7855e4290a63b6d1eec08d
   m_configObjects:
-    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: ecf0b4e336b612648824dae935315fb0, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: bc531137a56fe1144a8d48d21e07abc5, type: 2}

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ using dotenv.net;
 
 public class LeaderboardManager : MonoBehaviour
 {
-    string url = "https://flappybaichikapi.akmatoff.repl.co/api/records/";
+    string url = "https://flappybaichikapi--akmatoff.repl.co/api/records/";
     string token;
     string jsonStringArray;
     Record[] sortedRecords;
@@ -23,16 +24,16 @@ public class LeaderboardManager : MonoBehaviour
     public GameObject playerNameInput; // Input object
     public Transform leaderboardListContent;
     Records records;
-    void Start()
+    void Awake()
     {
         dataFetched = false;
         playerHighscore = PlayerPrefs.GetInt("Highscore", 0);
         recordPosition = 1;
         errorText.SetActive(false);
         addToLeaderboardMenu.SetActive(false);
-        DotEnv.Config(true, ".env"); // Set custom path of the file
-        var envReader = new EnvReader(); 
-        token = envReader.GetStringValue("TOKEN"); // Get string from dotenv file
+        // DotEnv.Config(false, Application.persistentDataPath + "/.env"); // Set custom path of the file
+        // var envReader = new EnvReader(); 
+        // token = envReader.GetStringValue("TOKEN"); // Get string from dotenv file
         StartCoroutine(FetchRecords()); // Fetch data on start
     }
 
@@ -42,7 +43,7 @@ public class LeaderboardManager : MonoBehaviour
         getRecords.SetRequestHeader("Accept", "application/json");
         getRecords.SetRequestHeader("Authorization", $"Token {token}");
         yield return getRecords.SendWebRequest();
-
+        
         if (getRecords.responseCode == 200) {
             Debug.Log("Data fetched!");
             jsonStringArray = "{\"records\":" + getRecords.downloadHandler.text + "}"; // Wrap JSON Array

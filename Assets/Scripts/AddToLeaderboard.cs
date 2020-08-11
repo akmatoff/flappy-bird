@@ -10,4 +10,4 @@ public class AddToLeaderboard : MonoBehaviour
     public void CloseAddToLeaderboardMenu() {
         addToLeaderboardMenu.SetActive(false);
     }
-}
+}   
