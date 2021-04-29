@@ -10,7 +10,7 @@ using dotenv.net;
 public class LeaderboardManager : MonoBehaviour
 {
     string url = "https://flappybaichikapi--akmatoff.repl.co/api/records/";
-    string token;
+    string token = "";
     string jsonStringArray;
     Record[] sortedRecords;
     int recordPosition;
