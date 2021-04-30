@@ -2,20 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class CharacterSelect : MonoBehaviour
 {
-    public List<CharacterModel> characterList = new List<CharacterModel>();
+    public List<CharacterModel> characters = new List<CharacterModel>();
+
+    private int selected = 0;
 
     public TextMeshProUGUI characterName;
-    public Image character;
-    public bool unlocked = false;
-}
-
-public class CharacterModel
-{
-    public Sprite characterImage;
-    public string characterName;
+    public Image characterImage;
     public bool unlocked;
+
+    private void Start()
+    {
+        UpdateUI();
+    }
+
+    // Next character
+    public void Next()
+    {
+        selected++;
+        if (selected == characters.Count) selected = 0;
+        UpdateUI();
+    }
+
+    // Previous character
+    public void Prev()
+    {
+        selected--;
+        if (selected < 0) selected = characters.Count - 1;
+
+        UpdateUI();
+    }
+
+    public void Confirm()
+    {
+        SceneManager.LoadSceneAsync(0);
+    }
+
+    private void UpdateUI()
+    {
+        characterName.text = characters[selected].characterName;
+        characterImage.sprite = characters[selected].characterImage;
+        unlocked = characters[selected].unlocked;
+    }
 }
