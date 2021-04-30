@@ -39,6 +39,8 @@ public class CharacterSelect : MonoBehaviour
 
     public void Confirm()
     {
+        // Save index of the selected character
+        PlayerPrefs.SetInt("currentCharacter", selected);
         SceneManager.LoadSceneAsync(0);
     }
 

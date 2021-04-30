@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LeaderboardScene.unity
     guid: df8c3de9db7855e4290a63b6d1eec08d
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelectionScene.unity
+    guid: cc91c72bbaf9c514693b51b03249f934
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: bc531137a56fe1144a8d48d21e07abc5, type: 2}

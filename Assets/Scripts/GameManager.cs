@@ -61,6 +61,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync(1);
     }
 
+    public void OpenCharacterSelectMenu()
+    {
+        SceneManager.LoadSceneAsync(2);
+    }
+
     // Update is called once per frame
     void Update()
     {
