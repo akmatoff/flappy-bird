@@ -9,7 +9,7 @@ public class CharacterSelect : MonoBehaviour
 {
     public List<CharacterModel> characters = new List<CharacterModel>();
 
-    private int selected = 0;
+    private int selected;
 
     public TextMeshProUGUI characterName;
     public Image characterImage;
@@ -17,6 +17,7 @@ public class CharacterSelect : MonoBehaviour
 
     private void Start()
     {
+        selected = PlayerPrefs.GetInt("currentCharacter", 0);
         UpdateUI();
     }
 

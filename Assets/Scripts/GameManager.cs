@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -17,9 +18,17 @@ public class GameManager : MonoBehaviour
     public GameObject menu;
     public bool gameOver = false;
     public bool gameStarted = false;
+    
+    public GameObject[] players;
+
+    private int characterSelected;
 
     public void Awake()
-    {
+    { 
+        // Load character
+        characterSelected = PlayerPrefs.GetInt("currentCharacter", 0); // Get index of the current character
+        Instantiate(players[characterSelected]);
+
         audioSource = GetComponent<AudioSource>();
         playerController = FindObjectOfType<PlayerController>();
         playerController.playerGravityScale = 0;
