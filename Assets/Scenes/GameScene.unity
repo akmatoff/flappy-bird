@@ -799,10 +799,10 @@ MonoBehaviour:
   menu: {fileID: 1520304164}
   gameOver: 0
   gameStarted: 0
-  characterSelect: {fileID: 3589983403217376019, guid: e7fd886d4d395874ea23255363fd4f72, type: 3}
   players:
   - {fileID: 4528699322227791483, guid: 1d168cc4ac0e86f45985988bfe8fa641, type: 3}
   - {fileID: 4528699322227791483, guid: c4111348f23cff448bc55940c680074f, type: 3}
+  - {fileID: 4528699322227791483, guid: edb7357f5524b094e86854b70b2f5b99, type: 3}
 --- !u!4 &1019999309
 Transform:
   m_ObjectHideFlags: 0

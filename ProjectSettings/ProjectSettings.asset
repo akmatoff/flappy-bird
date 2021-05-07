@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Boorsoft
-  productName: Flappy IT-118
+  productName: Flappy Baichik 2
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
@@ -131,7 +131,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.0.0
+  bundleVersion: 2.0.0
   preloadedAssets:
   - {fileID: 102900000, guid: 64a231ebcbeeeb149a5f980448f2d87b, type: 3}
   - {fileID: 102900000, guid: df8c3de9db7855e4290a63b6d1eec08d, type: 3}
